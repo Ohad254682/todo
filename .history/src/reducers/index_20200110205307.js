@@ -33,11 +33,11 @@ export function rootReducer(state = { todos: [], todosToShow: [], searchTerm: 'A
                 ...state, todos: state.todos.map(todo => todo._id !== action.todo._id ? todo : action.todo)
             }
         case 'TODO_POST':
-
-            return {
-                ...state, todos: [...state.todos, action.todo]
+            else {
+                return {
+                    ...state, todos: [...state.todos, action.todo]
+                }
             }
-
         case 'SET_TODOS':
             return {
                 ...state, todos: action.todos

@@ -17,26 +17,20 @@ class TodoApp extends Component {
 
 
   componentDidMount() {
-    if (!this.props.todos.length) {
-      this.props.loadTodos().then(() => this.TodosToShow())
-    }
+    this.props.loadTodos()
+
   }
   onRemove = (todoId) => {
     this.props.removeTodo(todoId)
-      .then(this.TodosToShow);
   }
 
   toggleIsDone = (todoId) => {
     this.props.toggleIsDone(todoId)
-      .then(this.TodosToShow);
   }
   setFilter = (searchTerm) => {
     this.props.setSearchTerm(searchTerm).then(this.props.filterBy);
   }
 
-  TodosToShow = () => {
-    this.props.filterBy(this.props.searchTerm)
-  }
   render() {
     return (
       <section>

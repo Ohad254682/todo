@@ -28,18 +28,10 @@ export function removeTodo(todoId) {
 }
 export function saveTodo(editedTodo) {
     return (dispatch) => {
-        if (editedTodo._id) {
-            return TodosService.save(editedTodo)
-                .then((todo) => {
-                    dispatch({ type: 'TODO_PUT', todo })
-                })
-            }
-        else {
-                return TodosService.save(editedTodo)
-                    .then((todo) => {
-                        dispatch({ type: 'TODO_POST', todo })
-                    })
-            }
+        return TodosService.save(editedTodo)
+            .then((todo) => {
+                dispatch({ type: 'TODO_SAVE', todo })
+            }).then(filterBy())
     }
 }
 

@@ -6,7 +6,7 @@ export function loadTodos() {
         return TodosService.query()
             .then(todos => {
                 dispatch(setTodos(todos))
-            })
+            }).then(filterBy())
     }
 }
 
@@ -23,23 +23,15 @@ export function removeTodo(todoId) {
         return TodosService.remove(todoId)
             .then(() => {
                 dispatch({ type: 'TODO_REMOVE', todoId })
-            })
+            }).then(filterBy())
     }
 }
 export function saveTodo(editedTodo) {
     return (dispatch) => {
-        if (editedTodo._id) {
-            return TodosService.save(editedTodo)
-                .then((todo) => {
-                    dispatch({ type: 'TODO_PUT', todo })
-                })
-            }
-        else {
-                return TodosService.save(editedTodo)
-                    .then((todo) => {
-                        dispatch({ type: 'TODO_POST', todo })
-                    })
-            }
+        return TodosService.save(editedTodo)
+            .then((todo) => {
+                dispatch({ type: 'TODO_SAVE', todo })
+            }).then(filterBy())
     }
 }
 
@@ -48,7 +40,7 @@ export function toggleIsDone(todoId) {
         return TodosService.toggleIsDone(todoId)
             .then((todo) => {
                 dispatch({ type: 'TODO_TOGGLEISDONE', todo })
-            })
+            }).then(filterBy())
     }
 }
 

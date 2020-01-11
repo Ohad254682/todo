@@ -17,8 +17,11 @@ class TodoApp extends Component {
 
 
   componentDidMount() {
-    if (!this.props.todos.length) {
-      this.props.loadTodos().then(() => this.TodosToShow())
+      if (!this.props.todos.length) {
+        this.props.loadTodos().then(() => this.TodosToShow())
+      } else {
+        this.TodosToShow();
+      }
     }
   }
   onRemove = (todoId) => {

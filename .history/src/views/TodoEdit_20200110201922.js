@@ -18,7 +18,6 @@ class TodoEdit extends Component {
     saveTodo = (ev) => {
         ev.preventDefault();
         this.props.saveTodo(this.state.todo)
-        .then(this.props.filterBy)
         this.props.history.push('/');
     }
 
